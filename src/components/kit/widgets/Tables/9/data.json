@@ -1,0 +1,32 @@
+[
+  {
+    "key": "1",
+    "avatar": "resources/images/avatars/5.jpg",
+    "Teacher": {"name": "Mary Stanform", "position": "Administrator"},
+    "description": {
+      "title": "人論",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    "location": "第一教室"
+  },
+  {
+    "key": "2",
+    "avatar": "resources/images/avatars/1.jpg",
+    "Teacher": {"name": "Garry Morge", "position": "Support"},
+    "description": {
+      "title": "神論",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    "location": "第二教室"
+  },
+  {
+    "key": "3",
+    "avatar": "resources/images/avatars/2.jpg",
+    "Teacher": {"name": "Silinda Veyron", "position": "Developer"},
+    "description": {
+      "title": "魔鬼論",
+      "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    },
+    "location": "第三教室"
+  }
+]
