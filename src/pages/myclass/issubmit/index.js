@@ -11,30 +11,102 @@ import {
 } from 'reactstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-function addDays (date, days) {
-  const result = new Date(date)
-  result.setDate(result.getDate() + days)
-  return result
-}
+import moment from 'moment'
 
 const ClassFlow = () => {
   const dispatch = useDispatch()
-  const store = useSelector(state => state)
-  console.log('class store', store)
+  const { myclass } = useSelector(state => state.myClass)
+  console.log('myclass list', myclass)
 
   useEffect(() => {
     dispatch({
       type: 'GET_CLASS_DATA',
       payload: {
-        StartDate: addDays(Date.now(), -30).toLocaleDateString(),
-        EndDate: addDays(Date.now(), 30).toLocaleDateString(),
+        StartDate: moment()
+          .add(-30, 'Days')
+          .format('YYYY/MM/DD'),
+        EndDate: moment()
+          .add(30, 'Days')
+          .format('YYYY/MM/DD'),
       },
     })
+    console.log('useEffect list')
   }, [dispatch])
 
+  if (!myclass.length) {
+    return (
+      <div className='row'>
+        <div className='col-sm-12'>
+          <Card>
+            <div className='row'>
+              <div className='col-lg-5' style={{ padding: '30px 30px 30px 45px' }}>  </div>
+              <div className='col-lg-7'>
+                <CardHeader> </CardHeader>
+                <CardBody>
+                  <CardSubtitle className='text-muted'> </CardSubtitle>
+                  <CardText> </CardText>
+                  <CardSubtitle className='text-muted'> </CardSubtitle>
+                  <CardText> </CardText>
+                  <CardText> </CardText>
+                  <CardFooter className='text-center'> </CardFooter>
+                </CardBody>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
+    )
+  }
   return (
     <div>
+      {myclass.map(data => (
+        <div className='row' key={data.activityId}>
+          <div className='col-sm-12'>
+            <Card>
+              <div className='row'>
+                <div className='col-lg-5' style={{ padding: '30px 30px 30px 45px' }}>
+                  <CardImg top width='100%' height='100%' src={data.pictureUrl} alt='Card cap' />
+                </div>
+                <div className='col-lg-7'>
+                  <CardHeader>{data.activityName}</CardHeader>
+                  <CardBody>
+                    <CardSubtitle className='text-muted'>課程簡介</CardSubtitle>
+                    <CardText>{data.description}</CardText>
+                    <CardSubtitle className='text-muted'>下次上課資訊</CardSubtitle>
+                    <CardText>{`${moment(data.classes[0].startDate).format('YYYY-MM-DD HH:mm:ss',)} ${data.classes[0].className}`}</CardText>
+                    <CardText>{`${data.classes[0].classAddress} ${data.classes[0].classRoom}`}</CardText>
+                    <CardText>{`${data.classes[0].description} ${data.classes[0].teacher}`}</CardText>
+                    <CardFooter className='text-center'>
+                      <div className='row center'>
+                        <div className='col-sm-3 mb-2'>
+                          <Button disabled block color='success' className='btn-rounded'>
+                            已經報名
+                          </Button>
+                        </div>
+                        <div className='col-sm-3 mb-2'>
+                          <Button block color='success' className='btn-rounded'>
+                            我要報到
+                          </Button>
+                        </div>
+                        <div className='col-sm-3 mb-2'>
+                          <Button block color='secondary' className='btn-rounded'>
+                            我要繳費
+                          </Button>
+                        </div>
+                        <div className='col-sm-3 mb-2'>
+                          <Button block color='primary' className='btn-rounded'>
+                            課程詳情
+                          </Button>
+                        </div>
+                      </div>
+                    </CardFooter>
+                  </CardBody>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      ))}
       <div className='row'>
         <div className='col-sm-12'>
           <Card>

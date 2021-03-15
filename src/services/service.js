@@ -3,15 +3,18 @@ import { notification } from 'antd'
 import { envConfig } from 'services/envConfig'
 import { menuData } from './constant'
 
-export async function ClassData() {
+
+export async function ClassData (StartDate,EndDate) {
+  const apipath = `${envConfig.path}Activity/list`;
   return apiClient
-    .get(`${envConfig.path}Activity/list`, {
+    .get(apipath, {
       params: {
-        StartDate: addDays(Date.now(), -30).toLocaleDateString(),
-        EndDate: addDays(Date.now(), 30).toLocaleDateString(),
+        StartDate,
+        EndDate,
       },
     })
     .then(response => {
+      console.log(`response:${response}`);
       const { status, data } = response.data
       if (status === '1000') {
         if (data) {
@@ -26,17 +29,12 @@ export async function ClassData() {
       return false
     })
     .catch(err => {
+      console.log(`Error:${err}`)
       notification.warning({
-        message: 'err',
-        description: err,
+        message: 'Error',
+        description: `Error:${apipath}`,
       })
     })
-}
-
-function addDays (date, days) {
-  const result = new Date(date)
-  result.setDate(result.getDate() + days)
-  return result
 }
 
 export const getMenuData = () => {
