@@ -10,6 +10,7 @@ import {
   CardFooter,
 } from 'reactstrap'
 import moment from 'moment'
+import IsAttend from './IsAttend'
 import IsFee from './IsFee'
 
 const Activity = ({ data, isSubmit }) => {
@@ -44,12 +45,10 @@ const Activity = ({ data, isSubmit }) => {
                       )}
                     </div>
                     <div className='col-sm-3 mb-2'>
-                      <IsFee classId={data.classes[0].classId} />
+                      <IsAttend classId={data.classes[0].classId} />
                     </div>
                     <div className='col-sm-3 mb-2'>
-                      <Button block color='secondary' className='btn-rounded'>
-                        我要繳費
-                      </Button>
+                      <IsFee classId={data.classes[0].classId} />
                     </div>
                     <div className='col-sm-3 mb-2'>
                       <Button block color='primary' className='btn-rounded'>
